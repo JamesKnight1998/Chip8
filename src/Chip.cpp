@@ -91,8 +91,7 @@ void Chip::LoadROM(char const* fileName) {
   // Chip::Open the file as a stream of binary and move the file pointer to the end
 	std::ifstream file(fileName, std::ios::binary | std::ios::ate);
 
-	if (file.is_open())
-	{
+	if (file.is_open()) {
 		// Get size of file and allocate a buffer to hold the contents
     std::streampos size = file.tellg();
     char *buffer = new char[size];
@@ -103,8 +102,7 @@ void Chip::LoadROM(char const* fileName) {
     file.close();
 
     // Load the ROM contents into the Chip's memory, starting at 0x200
-		for (long i = 0; i < size; ++i)
-		{
+		for (long i = 0; i < size; ++i) {
 			memory[START_ADDRESS + i] = buffer[i];
 		}
 
@@ -125,14 +123,12 @@ void Chip::Cycle()
 	((*this).*(table[(opcode & 0xF000u) >> 12u]))();
 
 	// Decrement the delay timer if it's been set
-	if (delayTimer > 0)
-	{
+	if (delayTimer > 0) {
 		--delayTimer;
 	}
 
 	// Decrement the sound timer if it's been set
-	if (soundTimer > 0)
-	{
+	if (soundTimer > 0) {
 		--soundTimer;
 	}
 }
