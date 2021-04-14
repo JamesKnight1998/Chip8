@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 
 View::View(char const* title, int windowWidth, int windowHeight, int textureWidth, int textureHeight) {
+	//Initialised SDL2 window with constructor arguments
 	SDL_Init(SDL_INIT_VIDEO);
 
 	window = SDL_CreateWindow(title, 0, 0, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
@@ -13,6 +14,7 @@ View::View(char const* title, int windowWidth, int windowHeight, int textureWidt
 }
 
 View::~View() {
+	//Free the various SDL2 resources.
 	SDL_DestroyTexture(texture);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
@@ -20,6 +22,7 @@ View::~View() {
 }
 
 void View::Update(void const* buffer, int pitch) {
+	//Update the screen to use the new pixel buffer passed in from the latest CPU cycle
 	SDL_UpdateTexture(texture, nullptr, buffer, pitch);
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, texture, nullptr, nullptr);
